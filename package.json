@@ -1,0 +1,16 @@
+{
+  "name": "firestore-to-mongo",
+  "version": "1.0.0",
+  "description": "A script to transfer data from Firebase Firestore to MongoDB",
+  "main": "firestore_to_mongodb.js",
+  "scripts": {
+    "start": "node firestore_to_mongodb.js"
+  },
+  "dependencies": {
+    "firebase-admin": "^11.8.0",
+    "mongodb": "^5.6.0",
+    "dotenv": "^16.0.3"
+  },
+  "author": "",
+  "license": "MIT"
+}
