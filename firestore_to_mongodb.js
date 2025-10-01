@@ -1,15 +1,16 @@
+require('dotenv').config();
 const admin = require('firebase-admin');
 const { MongoClient } = require('mongodb');
 
-const serviceAccount = require('./path-to-your-firebase-service-account.json');
+const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
 });
 const firestore = admin.firestore();
 
-const mongoUrl = 'mongodb://localhost:27017';
-const dbName = 'your_mongodb_database';
-const collectionName = 'your_collection';
+const mongoUrl = process.env.MONGO_URL;
+const dbName = process.env.MONGO_DB_NAME;
+const collectionName = process.env.MONGO_COLLECTION_NAME;
 
 async function transferData() {
   try {
@@ -25,10 +26,10 @@ async function transferData() {
     for (const collectionRef of collections) {
       const collectionName = collectionRef.id;
       console.log(`Processing Firestore collection: ${collectionName}`);
-      
+
       const snapshot = await collectionRef.get();
       const documents = [];
-      
+
       snapshot.forEach(doc => {
         documents.push({
           _id: doc.id,
